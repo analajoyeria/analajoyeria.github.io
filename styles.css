@@ -1,0 +1,119 @@
+:root {
+  --oro: #b8862f;
+  --oro-oscuro: #8a611c;
+  --oro-claro: #e9d3a3;
+  --fondo: #fffdf9;
+  --crema: #f7f0e3;
+  --texto: #3a2e1f;
+  --gris: #7a6e5f;
+  --radio: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Jost", system-ui, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+a { color: inherit; }
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(255, 253, 249, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--oro-claro);
+}
+.header__logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.header__logo img { height: 36px; mix-blend-mode: multiply; }
+.header__logo span { font-family: "Cinzel", serif; font-weight: 600; letter-spacing: .15em; color: var(--oro-oscuro); }
+.header__wa {
+  font-size: .85rem; text-decoration: none; color: var(--oro-oscuro);
+  border: 1px solid var(--oro); border-radius: 999px; padding: 6px 14px;
+}
+
+/* ---------- Hero ---------- */
+.hero { text-align: center; padding: 32px 16px 24px; }
+.hero__logo { width: min(320px, 80%); height: auto; mix-blend-mode: multiply; }
+.hero__text { margin-top: 12px; color: var(--gris); font-weight: 300; }
+
+/* ---------- Controles ---------- */
+.catalogo { max-width: 1100px; margin: 0 auto; padding: 0 16px 48px; }
+.controles { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+#buscar {
+  width: 100%; padding: 12px 16px; font: inherit;
+  border: 1px solid var(--oro-claro); border-radius: 999px; background: #fff;
+}
+#buscar:focus { outline: 2px solid var(--oro); outline-offset: 1px; }
+.filtros { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.filtro {
+  flex: none; font: inherit; font-size: .9rem; cursor: pointer;
+  padding: 7px 16px; border-radius: 999px;
+  border: 1px solid var(--oro-claro); background: #fff; color: var(--texto);
+}
+.filtro.activo { background: var(--oro); border-color: var(--oro); color: #fff; }
+
+/* ---------- Grid ---------- */
+.grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 720px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
+@media (min-width: 1000px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+.card {
+  background: #fff; border: 1px solid var(--crema); border-radius: var(--radio);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: transform .2s, box-shadow .2s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(138, 97, 28, .12); }
+
+.card__img {
+  position: relative; aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--crema), var(--oro-claro));
+  display: grid; place-items: center;
+}
+.card__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card__placeholder { font-size: 2.2rem; color: var(--oro); opacity: .6; }
+.card__tag {
+  position: absolute; top: 10px; left: 10px;
+  background: var(--texto); color: #fff; font-size: .75rem;
+  padding: 3px 10px; border-radius: 999px;
+}
+
+.card__body { padding: 12px 12px 14px; display: flex; flex-direction: column; flex: 1; }
+.card__cat { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--oro); }
+.card__nombre { font-family: "Cinzel", serif; font-weight: 500; font-size: 1rem; margin: 2px 0 4px; }
+.card__desc { font-size: .85rem; color: var(--gris); font-weight: 300; flex: 1; }
+.card__precio { font-weight: 500; font-size: 1.05rem; margin: 8px 0 10px; color: var(--oro-oscuro); }
+
+.btn {
+  display: block; text-align: center; text-decoration: none;
+  background: var(--oro); color: #fff; font-size: .88rem; font-weight: 500;
+  padding: 10px; border-radius: 10px;
+}
+.btn:hover { background: var(--oro-oscuro); }
+.btn--off { background: #ddd; color: #777; cursor: not-allowed; }
+.btn--off:hover { background: #ddd; }
+.card.agotado .card__img { filter: grayscale(.6); }
+
+.vacio { text-align: center; color: var(--gris); padding: 32px 0; }
+
+/* ---------- Footer ---------- */
+.footer { text-align: center; padding: 24px 16px 40px; color: var(--gris); font-size: .9rem; }
+.footer__sep { display: flex; align-items: center; gap: 12px; color: var(--oro); margin-bottom: 12px; }
+.footer__sep::before, .footer__sep::after { content: ""; flex: 1; height: 1px; background: var(--oro-claro); }
+.footer__marca { font-family: "Cinzel", serif; letter-spacing: .2em; color: var(--oro-oscuro); margin-bottom: 6px; }
+.footer a { color: var(--oro-oscuro); }
+.footer__copy { margin-top: 8px; font-size: .8rem; }
+
+@media (max-width: 400px) {
+  .card__desc { display: none; }
+  .card__nombre { font-size: .9rem; }
+  .btn { font-size: .8rem; padding: 9px 6px; }
+}

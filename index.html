@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anala Joyería | Catálogo</title>
+  <meta name="description" content="Catálogo de Anala Joyería: anillos, collares, aretes y pulseras. Pide por WhatsApp.">
+  <link rel="icon" href="img/logo-a.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="#" class="header__logo"><img src="img/logo-a.jpg" alt="Anala"> <span>ANALA</span></a>
+    <a class="header__wa" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
+  </header>
+
+  <section class="hero">
+    <img src="img/logo.jpg" alt="Anala Joyería" class="hero__logo">
+    <p class="hero__text">Piezas que brillan contigo. Elige tu favorita y pídela por WhatsApp.</p>
+  </section>
+
+  <main class="catalogo">
+    <div class="controles">
+      <input type="search" id="buscar" placeholder="Buscar joya..." aria-label="Buscar joya">
+      <div class="filtros" id="filtros"></div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <p class="vacio" id="vacio" hidden>No encontramos joyas con esa búsqueda.</p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__sep"><span>✦</span></div>
+    <p class="footer__marca">ANALA JOYERÍA</p>
+    <p><a id="waFooter" href="#" target="_blank" rel="noopener">WhatsApp</a> · <a id="instagram" href="#" target="_blank" rel="noopener">Instagram</a></p>
+    <p class="footer__copy">© <span id="anio"></span> Anala Joyería</p>
+  </footer>
+
+  <script src="productos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
