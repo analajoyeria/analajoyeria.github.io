@@ -27,5 +27,5 @@
   {"id":146,"nombre":"CADENA VENECIANA DE 45 CM","referencia":"REF276200005","precio":120000,"imagen":"img/productos/cadenas/CADENAVENECIANADE45CM.webp"},
   {"id":147,"nombre":"CADENA VENECIANA ORO ROSA 45 CM","referencia":"REF277500001","precio":135000,"imagen":"img/productos/cadenas/CADENAVENECIAOROROSA45CM.webp"},
   {"id":148,"nombre":"ROSARIO 45 CM BALIN #5","referencia":"REF2713500005","precio":210000,"imagen":"img/productos/cadenas/ROSARIO45CMBALIN%235.webp"},
-  {"id":149,"nombre":"ROSARIO DE 45 CM","precio":null,"imagen":"img/productos/cadenas/ROSARIODE45CM.webp"}
+  {"id":149,"nombre":"ROSARIO DE 45 CM","referencia":"REF278500001","precio":140000,"imagen":"img/productos/cadenas/ROSARIODE45CM.webp"}
 ]
