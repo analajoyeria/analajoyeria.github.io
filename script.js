@@ -45,7 +45,7 @@ function precioTexto(p) {
 }
 
 function linkPedido(p) {
-  return linkWhatsApp(`¡Hola Anala Joyería! Me interesa: ${etiqueta(p)}${p.precio ? ` (${formatoCOP.format(p.precio)})` : ""}. ¿Está disponible?`);
+  return linkWhatsApp(`¡Hola Anala Joyería! Me interesa: ${etiqueta(p)}${p.referencia ? ` (Ref. ${p.referencia})` : ""}${p.precio ? ` (${formatoCOP.format(p.precio)})` : ""}. ¿Está disponible?`);
 }
 
 function botonPedido(p) {
@@ -65,6 +65,10 @@ const waGeneral = linkWhatsApp("¡Hola Anala Joyería! Quiero información sobre
 document.getElementById("waHeader").href = waGeneral;
 document.getElementById("waFooter").href = waGeneral;
 document.getElementById("instagram").href = CONFIG.instagram;
+if (CONFIG.facebook) {
+  document.getElementById("facebook").href = CONFIG.facebook;
+  document.getElementById("facebookWrap").hidden = false;
+}
 document.getElementById("anio").textContent = new Date().getFullYear();
 
 // Filtros por categoría (se crean solos a partir de los productos)
@@ -103,7 +107,7 @@ function render() {
   const q = normalizar(buscar.value.trim());
   const lista = PRODUCTOS.filter(p =>
     (categoriaActiva === "Todas" || p.categoria === categoriaActiva) &&
-    normalizar((p.nombre || "") + " " + p.categoria).includes(q)
+    normalizar(`${p.nombre || ""} ${p.referencia || ""} ${p.categoria}`).includes(q)
   );
   // Los productos con foto primero; los que aún no tienen foto, al final
   lista.sort((a, b) => fotosFaltantes.has(a.imagen) - fotosFaltantes.has(b.imagen));
@@ -122,6 +126,7 @@ function render() {
         <div class="card__body">
           <p class="card__cat">${p.categoria}</p>
           ${p.nombre ? `<h3 class="card__nombre">${p.nombre}</h3>` : ""}
+          ${p.referencia ? `<p class="card__ref">Ref. ${p.referencia}</p>` : ""}
           <p class="card__precio">${precioTexto(p)}</p>
           ${botonPedido(p)}
         </div>
@@ -157,6 +162,7 @@ function abrirModal(p) {
 
   document.getElementById("modalCat").textContent = p.categoria;
   document.getElementById("modalNombre").textContent = p.nombre || "";
+  document.getElementById("modalRef").textContent = p.referencia ? `Ref. ${p.referencia}` : "";
   document.getElementById("modalPrecio").textContent = precioTexto(p);
   document.getElementById("modalAccion").innerHTML = botonPedido(p);
   modal.classList.toggle("agotado", !!p.agotado);

@@ -110,6 +110,7 @@ img + .card__placeholder { display: none; } /* solo se ve si la foto no cargó *
 .card__body { padding: 12px 12px 14px; display: flex; flex-direction: column; flex: 1; }
 .card__cat { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--oro); }
 .card__nombre { font-family: "Cinzel", serif; font-weight: 500; font-size: 1rem; margin: 2px 0 4px; }
+.card__ref { font-size: .75rem; color: var(--gris, #888); letter-spacing: .04em; margin: 0 0 4px; }
 .card__precio { font-weight: 500; font-size: 1.05rem; margin: auto 0 10px; padding-top: 8px; color: var(--oro-oscuro); }
 
 .btn {

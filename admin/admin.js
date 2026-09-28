@@ -307,6 +307,7 @@ function abrirVista(cat) {
   if (esConfig) {
     $("cfgWhatsapp").value = estado.config.datos.whatsapp || "";
     $("cfgInstagram").value = estado.config.datos.instagram || "";
+    $("cfgFacebook").value = estado.config.datos.facebook || "";
   } else {
     $("buscar").value = "";
     pintarLista();
@@ -322,7 +323,7 @@ function pintarLista() {
   const items = estado.listas[archivo].items;
   const q = slug($("buscar").value);
   const buscando = $("buscar").value.trim() !== "";
-  const visibles = buscando ? items.filter(p => slug(`${p.nombre || ""} ${p.id}`).includes(q)) : items;
+  const visibles = buscando ? items.filter(p => slug(`${p.nombre || ""} ${p.referencia || ""} ${p.id}`).includes(q)) : items;
 
   $("contador").textContent = buscando
     ? `${visibles.length} de ${items.length} productos`
@@ -335,7 +336,7 @@ function pintarLista() {
         <div class="item__foto"><img src="${esc(srcFoto(p.imagen))}" alt="" loading="lazy" onerror="this.remove()"></div>
         <div class="item__info">
           <p class="item__nombre${p.nombre ? "" : " item__nombre--vacio"}">${esc(p.nombre || `Sin nombre · ref. ${p.id}`)}</p>
-          <p class="item__precio">${p.precio ? formatoCOP.format(p.precio) : "Precio a consultar"}${p.agotado ? '<span class="item__tag">Agotado</span>' : ""}</p>
+          <p class="item__precio">${p.referencia ? `Ref. ${esc(p.referencia)} · ` : ""}${p.precio ? formatoCOP.format(p.precio) : "Precio a consultar"}${p.agotado ? '<span class="item__tag">Agotado</span>' : ""}</p>
         </div>
         <div class="item__acciones">
           <button class="icono" data-accion="subir" title="Subir" aria-label="Subir" ${buscando || i === 0 ? "disabled" : ""}>↑</button>
@@ -426,6 +427,7 @@ function abrirFormulario(p) {
 
   $("formTitulo").textContent = p ? "Editar producto" : "Nuevo producto";
   $("fNombre").value = p?.nombre || "";
+  $("fReferencia").value = p?.referencia || "";
   $("fPrecio").value = p?.precio || "";
   $("fAgotado").checked = !!p?.agotado;
   $("fCategoria").innerHTML = estado.categorias.map(c =>
@@ -500,6 +502,7 @@ function errorFormulario(msg) {
 
 $("btnGuardar").addEventListener("click", async () => {
   const nombre = $("fNombre").value.trim().replace(/\s+/g, " ");
+  const referencia = $("fReferencia").value.trim().replace(/\s+/g, " ");
   const destino = $("fCategoria").value;
   if (!form.fotos.length) return errorFormulario("Sube al menos la foto principal.");
   if (!nombre && !form.producto) return errorFormulario("Escribe el nombre del producto.");
@@ -530,6 +533,7 @@ $("btnGuardar").addEventListener("click", async () => {
     const id = original ? original.id : Math.max(0, ...todosLosProductos().map(p => p.id)) + 1;
     const producto = { id };
     if (nombre) producto.nombre = nombre;
+    if (referencia) producto.referencia = referencia;
     producto.precio = leerPrecio();
     producto.imagen = rutas[0];
     if (rutas.length > 1) producto.imagenes = rutas;
@@ -626,11 +630,12 @@ $("formConfig").addEventListener("submit", async e => {
   e.preventDefault();
   const whatsapp = $("cfgWhatsapp").value.replace(/[^\d]/g, "");
   const instagram = $("cfgInstagram").value.trim();
+  const facebook = $("cfgFacebook").value.trim();
   if (whatsapp.length < 11 || whatsapp.length > 15) return aviso("Revisa el número: debe llevar el 57 adelante, ej. 573001234567.", true);
   cargando("Guardando configuración…");
   try {
     const actual = await leerArchivo("config.json");
-    const datos = { ...JSON.parse(actual.texto), whatsapp, instagram };
+    const datos = { ...JSON.parse(actual.texto), whatsapp, instagram, facebook };
     const sha = await escribirArchivo("config.json", textoABase64(JSON.stringify(datos, null, 2) + "\n"), actual.sha, "Actualizar configuración");
     estado.config = { sha, datos };
     $("cfgWhatsapp").value = whatsapp;
