@@ -1,7 +1,7 @@
 [
   {"id":200,"nombre":"CANDONGA CIRCON ROJO","precio":79000,"imagen":"img/productos/candongas/CANDONGACIRCONROJO.webp","referencia":"277000005"},
   {"id":199,"nombre":"CANDONGA CIRCON MINI","precio":80000,"imagen":"img/productos/candongas/CANDONGACIRCONMINI.webp","referencia":"273500005"},
-  {"id":197,"nombre":"CANDONGA CIRCON","precio":85000,"imagen":"img/productos/candongas/CANDONGACIRCON.webp"},
+  {"id":197,"nombre":"CANDONGA CIRCON","precio":85000,"imagen":"img/productos/candongas/CANDONGACIRCON.webp","referencia":"274000005"},
   {"id":198,"nombre":"CANDONGA CIRCON CONTINUO","precio":85000,"imagen":"img/productos/candongas/CANDONGACIRCONCONTINUO.webp","referencia":"274000005"},
   {"id":194,"nombre":"CANDONGA FLOR","precio":89000,"imagen":"img/productos/candongas/CANDONGAFLOR.webp","referencia":"274500005"},
   {"id":195,"nombre":"CANDONGA LISA","precio":89000,"imagen":"img/productos/candongas/CANDONGALISA.webp","referencia":"274500005"},
@@ -12,9 +12,9 @@
   {"id":190,"nombre":"CANDONGA CIRCON BLANCO","precio":108000,"imagen":"img/productos/candongas/CANDONGACIRCONBLANCO.webp","referencia":"276300005"},
   {"id":187,"nombre":"CANDONGA CIRCON VERDE","precio":110000,"imagen":"img/productos/candongas/CANDONGACIRCONVERDE.webp","referencia":"276500005"},
   {"id":188,"nombre":"CANDONGA GIRASOL CIRCON","precio":110000,"imagen":"img/productos/candongas/CANDONGAGIRASOLCIRCON.webp","referencia":"276500005"},
-  {"id":189,"nombre":"CANDONGA GRUESA LISA GRANDE","precio":110000,"imagen":"img/productos/candongas/CANDONGAGRUESALISAGRANDE.webp"},
+  {"id":189,"nombre":"CANDONGA GRUESA LISA GRANDE","precio":110000,"imagen":"img/productos/candongas/CANDONGAGRUESALISAGRANDE.webp","referencia":"276500005"},
   {"id":185,"nombre":"CANDONGA CARTIER","precio":115000,"imagen":"img/productos/candongas/CANDONGACARTIER.webp","referencia":"277000005"},
-  {"id":186,"nombre":"CANDONGA LISA GRANDE","precio":115000,"imagen":"img/productos/candongas/CANDONGALISAGRANDE.webp"},
+  {"id":186,"nombre":"CANDONGA LISA GRANDE","precio":115000,"imagen":"img/productos/candongas/CANDONGALISAGRANDE.webp","referencia":"276800005"},
   {"id":184,"nombre":"CANDONGA VF CIRCON","precio":125000,"imagen":"img/productos/candongas/CANDONGAVFCIRCON.webp","referencia":"277000005"},
   {"id":183,"nombre":"CANDONGA TIPO ORO","precio":150000,"imagen":"img/productos/candongas/CANDONGATIPOORO.webp","referencia":"279500005"}
 ]
