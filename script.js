@@ -45,7 +45,7 @@ function precioTexto(p) {
 }
 
 function linkPedido(p) {
-  return linkWhatsApp(`¡Hola Anala Joyería! Me interesa: ${etiqueta(p)}${p.referencia ? ` (${p.referencia})` : ""}${p.precio ? ` (${formatoCOP.format(p.precio)})` : ""}. ¿Está disponible?`);
+  return linkWhatsApp(`¡Hola Anala Joyería! Me interesa: ${etiqueta(p)}${p.referencia ? ` (Ref. ${p.referencia})` : ""}${p.precio ? ` (${formatoCOP.format(p.precio)})` : ""}. ¿Está disponible?`);
 }
 
 function botonPedido(p) {
@@ -126,7 +126,7 @@ function render() {
         <div class="card__body">
           <p class="card__cat">${p.categoria}</p>
           ${p.nombre ? `<h3 class="card__nombre">${p.nombre}</h3>` : ""}
-          ${p.referencia ? `<p class="card__ref">${p.referencia}</p>` : ""}
+          ${p.referencia ? `<p class="card__ref">Ref. ${p.referencia}</p>` : ""}
           <p class="card__precio">${precioTexto(p)}</p>
           ${botonPedido(p)}
         </div>
