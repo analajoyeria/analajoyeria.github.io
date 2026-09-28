@@ -1,5 +1,5 @@
 [
-  {"id":1,"nombre":"MANILLA BALIN # 4","precio":70000,"imagen":"img/productos/manillas-con-balines/manilla-con-balines-1.webp"},
+  {"id":1,"nombre":"MANILLA BALIN # 4","referencia":"REF272350005","precio":70000,"imagen":"img/productos/manillas-con-balines/manilla-con-balines-1.webp"},
   {"id":2,"precio":null,"imagen":"img/productos/manillas-con-balines/manilla-con-balines-2.webp"},
   {"id":3,"precio":null,"imagen":"img/productos/manillas-con-balines/manilla-con-balines-3.webp"},
   {"id":4,"precio":null,"imagen":"img/productos/manillas-con-balines/manilla-con-balines-4.webp"},
