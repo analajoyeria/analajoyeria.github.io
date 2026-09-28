@@ -1,5 +1,5 @@
 [
-  {"id":120,"nombre":"TOPOS BALIN #3","precio":69000,"imagen":"img/productos/topos/24.webp"},
+  {"id":120,"nombre":"TOPOS BALIN #3","referencia":"272950001","precio":69000,"imagen":"img/productos/topos/24.webp"},
   {"id":111,"nombre":"TOPOS BALIN #4","precio":75000,"imagen":"img/productos/topos/25.webp"},
   {"id":112,"nombre":"TOPOS CORAZON","precio":75000,"imagen":"img/productos/topos/36.webp"},
   {"id":113,"nombre":"TOPOS CORAZÓN PUNTO CIRCON","precio":75000,"imagen":"img/productos/topos/38.webp"},
