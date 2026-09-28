@@ -16,7 +16,7 @@
   {"id":135,"nombre":"CADENA CUBANA 60 CM","referencia":"REF271500001","precio":215000,"imagen":"img/productos/cadenas/CADENACUBANA60CM.webp"},
   {"id":136,"nombre":"CADENA ESCALERA DE 60 CM","precio":null,"imagen":"img/productos/cadenas/CADENAESCALERADE60CM.webp"},
   {"id":137,"nombre":"CADENA ESCALERA DE 60 CM 2MM","precio":null,"imagen":"img/productos/cadenas/CADENAESCALERADE60CM2MM.webp"},
-  {"id":138,"nombre":"CADENA ESCALERA TIPO ORO 60 CM","precio":null,"imagen":"img/productos/cadenas/CADENAESCALERATIPOORO60CM.webp"},
+  {"id":138,"nombre":"CADENA ESCALERA TIPO ORO 60 CM","referencia":"REF2712000005","precio":190000,"imagen":"img/productos/cadenas/CADENAESCALERATIPOORO60CM.webp"},
   {"id":139,"nombre":"CADENA ESPEJO CUBANA ORO ROSA 60 CM","precio":null,"imagen":"img/productos/cadenas/CADENAESOEJOCUBANAOROROSA60CM.webp"},
   {"id":140,"nombre":"CADENA ESPEJO CUADRADO 60 CM","precio":null,"imagen":"img/productos/cadenas/CADENAESPEJOCUADRADO60CM.webp"},
   {"id":141,"nombre":"CADENA ESPEJO CUBANA 60 CM","precio":null,"imagen":"img/productos/cadenas/CADENAESPEJOCUBANA60CM.webp"},
