@@ -126,7 +126,6 @@ function render() {
         <div class="card__body">
           <p class="card__cat">${p.categoria}</p>
           ${p.nombre ? `<h3 class="card__nombre">${p.nombre}</h3>` : ""}
-          ${p.referencia ? `<p class="card__ref">Ref. ${p.referencia}</p>` : ""}
           <p class="card__precio">${precioTexto(p)}</p>
           ${botonPedido(p)}
         </div>
