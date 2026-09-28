@@ -1,7 +1,7 @@
 [
   {"id":121,"nombre":"CADENA CHINESCA 3MM 60 CM","referencia":"REF2726000001","precio":340000,"imagen":"img/cadenas/CADENA CHINESCA 3MM 60CM.webp"},
   {"id":122,"nombre":"CADENA GUCCI ROSA 60 CM","referencia":"REF2721000001","precio":290000,"imagen":"img/cadenas/CADENA GUCCI ROSA 60CM.webp"},
-  {"id":123,"nombre":"CADENA LAZO 3MM 65 CM","precio":null,"imagen":"img/cadenas/CADENA LAZO 3MM 65CM.webp"},
+  {"id":123,"nombre":"CADENA LAZO 3MM 65 CM","referencia":"REF27230000005","precio":310000,"imagen":"img/cadenas/CADENA LAZO 3MM 65CM.webp"},
   {"id":124,"nombre":"CADENA MILITAR DIAMANTADA 60 CM","precio":null,"imagen":"img/cadenas/CADENA MILITAR DIAMANTADA 60CM.webp"},
   {"id":125,"nombre":"CADENA RÚSTICA 60 CM","precio":null,"imagen":"img/cadenas/CADENA RÚSTICA 60CM.webp"},
   {"id":126,"nombre":"CADENA 45 CM BALIN #4","precio":null,"imagen":"img/cadenas/CADENA45CMBALIN%234.webp"},
