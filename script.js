@@ -181,6 +181,7 @@ modal.addEventListener("keydown", e => {
 });
 
 modal.addEventListener("click", e => { if (e.target === modal) modal.close(); }); // clic fuera
+document.getElementById("modalCerrar").addEventListener("click", () => modal.close());
 
 // ---------- Visor de fotos en pantalla completa (PhotoSwipe) ----------
 // Al tocar una foto del modal se abre completa, con zoom (dos dedos, doble toque o rueda del mouse).
@@ -227,8 +228,14 @@ modalFotos.addEventListener("click", async e => {
   visor.init();
 });
 
-// Esc cierra solo el visor, no el modal del producto
-modal.addEventListener("cancel", e => { if (visor) e.preventDefault(); });
+// Esc o el botón "atrás" del celular cierran solo el visor, no el modal del producto
+modal.addEventListener("cancel", e => {
+  if (!visor) return;
+  e.preventDefault();
+  visor.close();
+});
+// Si el sistema cierra el modal de todas formas, el visor se destruye con él
+modal.addEventListener("close", () => { if (visor) visor.destroy(); });
 modal.addEventListener("close", () => document.documentElement.classList.remove("sin-scroll"));
 
 render();
