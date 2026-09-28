@@ -4,7 +4,7 @@
   {"id":203,"nombre":"PULSO CUBANO 17 CM","referencia":"REF2765000001","precio":115000,"imagen":"img/productos/pulseras/PULSOCUBADO17CM.webp"},
   {"id":204,"nombre":"PULSO CUBANO 19 CM","referencia":"REF277000005","precio":125000,"imagen":"img/productos/pulseras/PULSOCUBANO19CM.webp"},
   {"id":205,"nombre":"PULSO DIAMANTADO CIRCON BLANCO","referencia":"REF2712000001","precio":185000,"imagen":"img/productos/pulseras/PULSODIAMANTADOCIRCONBLANCO.webp"},
-  {"id":206,"nombre":"PULSO DIAMANTADO CIRCON VERDE","precio":null,"imagen":"img/productos/pulseras/PULSODIAMANTADOCIRCONVERDE.webp"},
+  {"id":206,"nombre":"PULSO DIAMANTADO CIRCON VERDE","referencia":"REF2712000005","precio":185000,"imagen":"img/productos/pulseras/PULSODIAMANTADOCIRCONVERDE.webp"},
   {"id":207,"nombre":"PULSO ESCALERA 17 CM","precio":null,"imagen":"img/productos/pulseras/PULSOESCALERA17CM.webp"},
   {"id":208,"nombre":"PULSO ESCALERA 19 CM","precio":null,"imagen":"img/productos/pulseras/PULSOESCALERA19CM.webp"},
   {"id":209,"nombre":"PULSO LAZO 18 CM","precio":null,"imagen":"img/productos/pulseras/PULSOLAZO18CM.webp"},
