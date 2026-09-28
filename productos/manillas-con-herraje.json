@@ -20,6 +20,6 @@
   {"id":30,"nombre":"MANILLA BOLSA DINERO BALIN # 4","referencia":"REF275970005","precio":110000,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-10.webp"},
   {"id":25,"nombre":"MANILLA VF DORADA","referencia":"REF274970005","precio":95000,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-5.webp"},
   {"id":29,"nombre":"MANILLA SAN BENITO BALIN # 4","referencia":"REF274570005","precio":89000,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-9.webp"},
-  {"id":41,"nombre":"MANILLA ROSA GUADALUPE BALIN #5","precio":null,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-21.webp"},
-  {"id":240,"nombre":"MANILLA ROSA BALIN LISO # 4 ROSA GUADALUPE","precio":null,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-23.webp"}
+  {"id":41,"oculto":true,"nombre":"MANILLA ROSA GUADALUPE BALIN #5","precio":null,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-21.webp"},
+  {"id":240,"oculto":true,"nombre":"MANILLA ROSA BALIN LISO # 4 ROSA GUADALUPE","precio":null,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-23.webp"}
 ]

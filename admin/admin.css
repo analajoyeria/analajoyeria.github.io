@@ -93,6 +93,7 @@ input:focus, select:focus { outline: 2px solid var(--oro); outline-offset: 1px; 
   background: #fff; border: 1px solid var(--crema); border-radius: var(--radio); padding: 8px;
 }
 .item.agotado .item__foto { filter: grayscale(.7); opacity: .7; }
+.item.oculto { opacity: .5; }
 .item__foto {
   width: 58px; height: 58px; border-radius: 8px; overflow: hidden;
   background: linear-gradient(135deg, var(--crema), var(--oro-claro));

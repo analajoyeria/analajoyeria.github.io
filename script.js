@@ -23,7 +23,7 @@ async function cargarDatos() {
   ]);
   const listas = await Promise.all(categoriasDef.map(c => leerJSON(`productos/${c.archivo}.json`)));
   CONFIG = config;
-  PRODUCTOS = listas.flatMap((lista, i) => lista.map(p => ({ ...p, categoria: categoriasDef[i].nombre })));
+  PRODUCTOS = listas.flatMap((lista, i) => lista.filter(p => !p.oculto).map(p => ({ ...p, categoria: categoriasDef[i].nombre })));
 }
 
 const formatoCOP = new Intl.NumberFormat("es-CO", {

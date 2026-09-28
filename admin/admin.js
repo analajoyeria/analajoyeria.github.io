@@ -332,11 +332,11 @@ function pintarLista() {
   $("lista").innerHTML = visibles.length ? visibles.map(p => {
     const i = items.indexOf(p);
     return `
-      <li class="item${p.agotado ? " agotado" : ""}" data-id="${p.id}">
+      <li class="item${p.agotado ? " agotado" : ""}${p.oculto ? " oculto" : ""}" data-id="${p.id}">
         <div class="item__foto"><img src="${esc(srcFoto(p.imagen))}" alt="" loading="lazy" onerror="this.remove()"></div>
         <div class="item__info">
           <p class="item__nombre${p.nombre ? "" : " item__nombre--vacio"}">${esc(p.nombre || `Sin nombre · ref. ${p.id}`)}</p>
-          <p class="item__precio">${p.referencia ? `Ref. ${esc(p.referencia)} · ` : ""}${p.precio ? formatoCOP.format(p.precio) : "Precio a consultar"}${p.agotado ? '<span class="item__tag">Agotado</span>' : ""}</p>
+          <p class="item__precio">${p.referencia ? `Ref. ${esc(p.referencia)} · ` : ""}${p.precio ? formatoCOP.format(p.precio) : "Precio a consultar"}${p.agotado ? '<span class="item__tag">Agotado</span>' : ""}${p.oculto ? '<span class="item__tag">Oculto</span>' : ""}</p>
         </div>
         <div class="item__acciones">
           <button class="icono" data-accion="subir" title="Subir" aria-label="Subir" ${buscando || i === 0 ? "disabled" : ""}>↑</button>
@@ -430,6 +430,7 @@ function abrirFormulario(p) {
   $("fReferencia").value = p?.referencia || "";
   $("fPrecio").value = p?.precio || "";
   $("fAgotado").checked = !!p?.agotado;
+  $("fOculto").checked = !!p?.oculto;
   $("fCategoria").innerHTML = estado.categorias.map(c =>
     `<option value="${esc(c.archivo)}"${c.archivo === estado.catActual ? " selected" : ""}>${esc(c.nombre)}</option>`).join("");
   $("formError").hidden = true;
@@ -538,6 +539,7 @@ $("btnGuardar").addEventListener("click", async () => {
     producto.imagen = rutas[0];
     if (rutas.length > 1) producto.imagenes = rutas;
     if ($("fAgotado").checked) producto.agotado = true;
+    if ($("fOculto").checked) producto.oculto = true;
 
     // 3. Guardar en la(s) lista(s)
     const etiqueta = nombre || `ref. ${id}`;
