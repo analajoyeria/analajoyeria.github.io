@@ -12,7 +12,7 @@
   {"id":131,"nombre":"CADENA BARRIL ROSA 50 CM","referencia":"REF279000001","precio":150000,"imagen":"img/productos/cadenas/CADENABARRILROSA50CM.webp"},
   {"id":132,"nombre":"CADENA BOLITA PALITO 45 CM","referencia":"REF275000005","precio":98000,"imagen":"img/productos/cadenas/CADENABOLITAPALITO45CM.webp"},
   {"id":133,"nombre":"CADENA CARTIER PLANA 60 CM","referencia":"REF2715000005","precio":225000,"imagen":"img/productos/cadenas/CADENACARTIERPLANA60CM.webp"},
-  {"id":134,"nombre":"CADENA CRISPETA 45 CM","precio":null,"imagen":"img/productos/cadenas/CADENACRISPETA45CM.webp"},
+  {"id":134,"nombre":"CADENA CRISPETA 45 CM","referencia":"REF2715000001","precio":120000,"imagen":"img/productos/cadenas/CADENACRISPETA45CM.webp"},
   {"id":135,"nombre":"CADENA CUBANA 60 CM","precio":null,"imagen":"img/productos/cadenas/CADENACUBANA60CM.webp"},
   {"id":136,"nombre":"CADENA ESCALERA DE 60 CM","precio":null,"imagen":"img/productos/cadenas/CADENAESCALERADE60CM.webp"},
   {"id":137,"nombre":"CADENA ESCALERA DE 60 CM 2MM","precio":null,"imagen":"img/productos/cadenas/CADENAESCALERADE60CM2MM.webp"},
