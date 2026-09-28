@@ -22,7 +22,7 @@
   {"id":141,"nombre":"CADENA ESPEJO CUBANA 60 CM","referencia":"REF2713000005","precio":195000,"imagen":"img/productos/cadenas/CADENAESPEJOCUBANA60CM.webp"},
   {"id":142,"nombre":"CADENA MILITAR 45 CM","referencia":"REF275800005","precio":108000,"imagen":"img/productos/cadenas/CADENAMILITAR45CM.webp"},
   {"id":143,"nombre":"CADENA MINI CUBANA CORAZON 45 CM","referencia":"REF276400005","precio":120000,"imagen":"img/productos/cadenas/CADENAMINICUBANACORAZON45CM.webp"},
-  {"id":144,"nombre":"CADENA MINI GUCCI DE 45 CM","precio":null,"imagen":"img/productos/cadenas/CADENAMINIGUCCIDE45CM.webp"},
+  {"id":144,"nombre":"CADENA MINI GUCCI DE 45 CM","referencia":"REF279000005","precio":150000,"imagen":"img/productos/cadenas/CADENAMINIGUCCIDE45CM.webp"},
   {"id":145,"nombre":"CADENA SINGAPUR 60 CM","precio":null,"imagen":"img/productos/cadenas/CADENASINGAPUR60CM.webp"},
   {"id":146,"nombre":"CADENA VENECIANA DE 45 CM","precio":null,"imagen":"img/productos/cadenas/CADENAVENECIANADE45CM.webp"},
   {"id":147,"nombre":"CADENA VENECIANA ORO ROSA 45 CM","precio":null,"imagen":"img/productos/cadenas/CADENAVENECIAOROROSA45CM.webp"},
