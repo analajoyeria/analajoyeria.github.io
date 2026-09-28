@@ -149,7 +149,7 @@ img + .card__placeholder { display: none; } /* solo se ve si la foto no cargó *
   background: linear-gradient(135deg, var(--crema), var(--oro-claro));
   display: grid; place-items: center;
 }
-.modal__foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.modal__foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
 .modal.agotado .modal__foto { filter: grayscale(.6); }
 .modal__flecha {
   position: absolute; top: 50%; transform: translateY(-50%);

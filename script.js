@@ -175,12 +175,60 @@ modalFotos.addEventListener("scroll", () => {
 });
 
 modal.addEventListener("keydown", e => {
-  if (modalPrev.hidden) return;
+  if (modalPrev.hidden || visor) return;
   if (e.key === "ArrowLeft") irAFoto(fotoActual() - 1);
   if (e.key === "ArrowRight") irAFoto(fotoActual() + 1);
 });
 
 modal.addEventListener("click", e => { if (e.target === modal) modal.close(); }); // clic fuera
+
+// ---------- Visor de fotos en pantalla completa (PhotoSwipe) ----------
+// Al tocar una foto del modal se abre completa, con zoom (dos dedos, doble toque o rueda del mouse).
+const PHOTOSWIPE_URL = "https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.esm.min.js";
+let visor = null;
+
+function tamanoFoto(img) {
+  if (img.complete && img.naturalWidth) return Promise.resolve(img);
+  return new Promise(listo => {
+    const tmp = new Image();
+    tmp.onload = tmp.onerror = () => listo(tmp);
+    tmp.src = img.currentSrc || img.src;
+  });
+}
+
+modalFotos.addEventListener("click", async e => {
+  const foto = e.target.closest(".modal__foto");
+  if (!foto || !foto.querySelector("img") || visor) return;
+  const conFoto = [...modalFotos.querySelectorAll(".modal__foto")].filter(f => f.querySelector("img"));
+  const imgs = conFoto.map(f => f.querySelector("img"));
+  const [{ default: PhotoSwipe }, tamanos] = await Promise.all([
+    import(PHOTOSWIPE_URL),
+    Promise.all(imgs.map(tamanoFoto)),
+  ]);
+  visor = new PhotoSwipe({
+    dataSource: imgs.map((img, i) => ({
+      src: img.currentSrc || img.src,
+      width: tamanos[i].naturalWidth || 1200,
+      height: tamanos[i].naturalHeight || 1200,
+      alt: img.alt,
+    })),
+    index: conFoto.indexOf(foto),
+    appendToEl: modal, // dentro del <dialog> para quedar por encima de él
+    bgOpacity: 0.95,
+    showHideAnimationType: "fade",
+    wheelToZoom: true,
+    closeTitle: "Cerrar",
+    zoomTitle: "Ampliar",
+    arrowPrevTitle: "Foto anterior",
+    arrowNextTitle: "Foto siguiente",
+    errorMsg: "No se pudo cargar la foto",
+  });
+  visor.on("destroy", () => { visor = null; });
+  visor.init();
+});
+
+// Esc cierra solo el visor, no el modal del producto
+modal.addEventListener("cancel", e => { if (visor) e.preventDefault(); });
 modal.addEventListener("close", () => document.documentElement.classList.remove("sin-scroll"));
 
 render();
