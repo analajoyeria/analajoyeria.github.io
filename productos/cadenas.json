@@ -4,7 +4,7 @@
   {"id":123,"nombre":"CADENA LAZO 3MM 65 CM","referencia":"REF27230000005","precio":310000,"imagen":"img/productos/cadenas/CADENA LAZO 3MM 65CM.webp"},
   {"id":124,"nombre":"CADENA MILITAR DIAMANTADA 60 CM","referencia":"REF2721000005","precio":280000,"imagen":"img/productos/cadenas/CADENA MILITAR DIAMANTADA 60CM.webp"},
   {"id":125,"nombre":"CADENA RÚSTICA 60 CM","referencia":"REF27450000001","precio":555000,"imagen":"img/productos/cadenas/CADENA RÚSTICA 60CM.webp"},
-  {"id":126,"nombre":"CADENA 45 CM BALIN #4","precio":null,"imagen":"img/productos/cadenas/CADENA45CMBALIN%234.webp"},
+  {"id":126,"nombre":"CADENA 45 CM BALIN #4","referencia":"REF278000005","precio":115000,"imagen":"img/productos/cadenas/CADENA45CMBALIN%234.webp"},
   {"id":127,"nombre":"CADENA ARGOLLA 45 CM","precio":null,"imagen":"img/productos/cadenas/CADENAARGOLLA45CM.webp"},
   {"id":128,"nombre":"CADENA AROS OVALADO 45 CM","precio":null,"imagen":"img/productos/cadenas/CADENAAROSOVALADO45CM.webp"},
   {"id":129,"nombre":"CADENA BARRIL 45 CM","precio":null,"imagen":"img/productos/cadenas/CADENABARRIL45CM.webp"},
