@@ -1,0 +1,47 @@
+[
+  {
+    "nombre": "Manillas",
+    "archivo": "manillas",
+    "carpeta": "img/productos/manillas"
+  },
+  {
+    "nombre": "Manillas con herraje",
+    "archivo": "manillas-con-herraje",
+    "carpeta": "img/productos/manillas-con-herraje"
+  },
+  {
+    "nombre": "Anillos",
+    "archivo": "anillos",
+    "carpeta": "img/productos/anillos"
+  },
+  {
+    "nombre": "Topos",
+    "archivo": "topos",
+    "carpeta": "img/productos/topos"
+  },
+  {
+    "nombre": "Cadenas",
+    "archivo": "cadenas",
+    "carpeta": "img/cadenas"
+  },
+  {
+    "nombre": "Cadenas con dije",
+    "archivo": "cadenas-con-dije",
+    "carpeta": "img/productos/cadenasdije"
+  },
+  {
+    "nombre": "Candongas",
+    "archivo": "candongas",
+    "carpeta": "img/productos/candongas"
+  },
+  {
+    "nombre": "Pulseras",
+    "archivo": "pulseras",
+    "carpeta": "img/productos/pulseras"
+  },
+  {
+    "nombre": "Dijes",
+    "archivo": "dijes",
+    "carpeta": "img/productos/dijes"
+  }
+]

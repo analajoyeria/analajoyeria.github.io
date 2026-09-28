@@ -5,6 +5,27 @@ const vacio = document.getElementById("vacio");
 
 let categoriaActiva = "Todas";
 
+// Datos del catálogo: se cargan desde config.json y productos/*.json
+// (los edita el panel de administración en /admin)
+let CONFIG = {};
+let PRODUCTOS = [];
+
+async function leerJSON(ruta) {
+  const r = await fetch(ruta, { cache: "no-cache" });
+  if (!r.ok) throw new Error(`No se pudo cargar ${ruta}`);
+  return r.json();
+}
+
+async function cargarDatos() {
+  const [config, categoriasDef] = await Promise.all([
+    leerJSON("config.json"),
+    leerJSON("productos/categorias.json"),
+  ]);
+  const listas = await Promise.all(categoriasDef.map(c => leerJSON(`productos/${c.archivo}.json`)));
+  CONFIG = config;
+  PRODUCTOS = listas.flatMap((lista, i) => lista.map(p => ({ ...p, categoria: categoriasDef[i].nombre })));
+}
+
 const formatoCOP = new Intl.NumberFormat("es-CO", {
   style: "currency", currency: "COP", maximumFractionDigits: 0,
 });
@@ -38,6 +59,7 @@ function fotosDe(p) {
   return p.imagenes && p.imagenes.length ? p.imagenes : [p.imagen];
 }
 
+function iniciar() {
 // Enlaces generales
 const waGeneral = linkWhatsApp("¡Hola Anala Joyería! Quiero información sobre el catálogo.");
 document.getElementById("waHeader").href = waGeneral;
@@ -59,19 +81,23 @@ filtrosEl.addEventListener("click", e => {
   render();
 });
 
+// Revisa qué fotos no existen (una vez por archivo) para mandar esos productos al final
+new Set(PRODUCTOS.map(p => p.imagen)).forEach(src => {
+  const img = new Image();
+  img.onerror = () => { fotosFaltantes.add(src); render(); };
+  img.src = src;
+});
+
+render();
+}
+
 buscar.addEventListener("input", render);
 
 function normalizar(txt) {
   return txt.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 }
 
-// Revisa qué fotos no existen (una vez por archivo) para mandar esos productos al final
 const fotosFaltantes = new Set();
-new Set(PRODUCTOS.map(p => p.imagen)).forEach(src => {
-  const img = new Image();
-  img.onerror = () => { fotosFaltantes.add(src); render(); };
-  img.src = src;
-});
 
 function render() {
   const q = normalizar(buscar.value.trim());
@@ -238,4 +264,10 @@ modal.addEventListener("cancel", e => {
 modal.addEventListener("close", () => { if (visor) visor.destroy(); });
 modal.addEventListener("close", () => document.documentElement.classList.remove("sin-scroll"));
 
-render();
+cargarDatos()
+  .then(iniciar)
+  .catch(err => {
+    console.error(err);
+    vacio.textContent = "No pudimos cargar el catálogo. Recarga la página en un momento.";
+    vacio.hidden = false;
+  });

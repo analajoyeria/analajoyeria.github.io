@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel | Anala Joyería</title>
+  <link rel="icon" href="../img/logo-a.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- ============ LOGIN ============ -->
+  <section class="login" id="vistaLogin" hidden>
+    <form class="login__caja" id="formLogin">
+      <img src="../img/logo.jpg" alt="Anala Joyería" class="login__logo">
+      <h1>Panel de administración</h1>
+      <label for="token">Token de acceso</label>
+      <input type="password" id="token" autocomplete="off" placeholder="github_pat_..." required>
+      <label class="check"><input type="checkbox" id="recordar" checked> Recordar en este dispositivo</label>
+      <button class="btn" type="submit" id="btnEntrar">Entrar</button>
+      <p class="login__error" id="loginError" hidden></p>
+    </form>
+  </section>
+
+  <!-- ============ PANEL ============ -->
+  <div id="vistaPanel" hidden>
+    <header class="top">
+      <div class="top__marca"><img src="../img/logo-a.jpg" alt=""> <span>PANEL ANALA</span></div>
+      <div class="top__acciones">
+        <a href="../" target="_blank" rel="noopener" class="link">Ver catálogo</a>
+        <button class="link" id="btnSalir">Salir</button>
+      </div>
+    </header>
+
+    <nav class="tabs" id="tabs"></nav>
+
+    <!-- Productos de una categoría -->
+    <main class="contenido" id="vistaProductos">
+      <div class="barra">
+        <input type="search" id="buscar" placeholder="Buscar..." aria-label="Buscar">
+        <button class="btn" id="btnNuevo">+ Nuevo producto</button>
+      </div>
+      <p class="contador" id="contador"></p>
+      <ul class="lista" id="lista"></ul>
+    </main>
+
+    <!-- Configuración -->
+    <main class="contenido" id="vistaConfig" hidden>
+      <form class="tarjeta" id="formConfig">
+        <h2>Configuración del catálogo</h2>
+        <label for="cfgWhatsapp">Número de WhatsApp</label>
+        <input id="cfgWhatsapp" inputmode="numeric" placeholder="573001234567" required>
+        <small>Con el 57 adelante, sin +, sin espacios.</small>
+        <label for="cfgInstagram">Link de Instagram</label>
+        <input id="cfgInstagram" type="url" placeholder="https://instagram.com/..." required>
+        <button class="btn" type="submit">Guardar configuración</button>
+      </form>
+    </main>
+
+    <div class="orden" id="barraOrden" hidden>
+      <span>Cambiaste el orden</span>
+      <button class="link" id="btnDescartarOrden">Descartar</button>
+      <button class="btn" id="btnGuardarOrden">Guardar orden</button>
+    </div>
+  </div>
+
+  <!-- ============ FORMULARIO DE PRODUCTO ============ -->
+  <dialog class="modal" id="modalProducto">
+    <form id="formProducto" method="dialog">
+      <h2 id="formTitulo">Nuevo producto</h2>
+
+      <label>Foto principal</label>
+      <div class="foto-principal" id="fotoPrincipal"></div>
+      <label class="btn btn--sec btn--file">
+        <span id="txtFoto">Subir foto</span>
+        <input type="file" id="inFoto" accept="image/*" hidden>
+      </label>
+
+      <label for="fNombre">Nombre</label>
+      <input id="fNombre" placeholder="Ej: ANILLO BALIN LISO #4">
+
+      <label for="fCategoria">Categoría</label>
+      <select id="fCategoria"></select>
+
+      <label for="fPrecio">Precio</label>
+      <input id="fPrecio" inputmode="numeric" placeholder="Vacío = Precio a consultar">
+      <small id="fPrecioVista"></small>
+
+      <label>Más fotos <small>(se ven al tocar la tarjeta)</small></label>
+      <div class="fotos-extra" id="fotosExtra"></div>
+      <label class="btn btn--sec btn--file">
+        + Agregar fotos
+        <input type="file" id="inExtras" accept="image/*" multiple hidden>
+      </label>
+
+      <label class="check check--grande"><input type="checkbox" id="fAgotado"> Agotado</label>
+
+      <p class="form__error" id="formError" hidden></p>
+      <div class="modal__botones">
+        <button type="button" class="btn btn--sec" id="btnCancelar">Cancelar</button>
+        <button type="button" class="btn" id="btnGuardar">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ============ CONFIRMAR ============ -->
+  <dialog class="modal modal--chico" id="modalConfirmar">
+    <p id="confirmarTexto"></p>
+    <div class="modal__botones">
+      <button class="btn btn--sec" id="confirmarNo">Cancelar</button>
+      <button class="btn btn--peligro" id="confirmarSi">Eliminar</button>
+    </div>
+  </dialog>
+
+  <div class="aviso" id="aviso" hidden></div>
+  <div class="cargando" id="cargando" hidden><div class="cargando__caja"><span class="spinner"></span><span id="cargandoTexto">Cargando…</span></div></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

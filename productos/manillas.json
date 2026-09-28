@@ -1,0 +1,22 @@
+[
+  {"id":1,"precio":120000,"imagen":"img/productos/pulsera-tennis.webp"},
+  {"id":2,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":3,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":4,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":5,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":6,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":7,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":8,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":9,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":10,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":11,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":12,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":13,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":14,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":15,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":16,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":17,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":18,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":19,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"},
+  {"id":20,"precio":85000,"imagen":"img/productos/anillo-solitario.webp"}
+]
