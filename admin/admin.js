@@ -336,7 +336,7 @@ function pintarLista() {
         <div class="item__foto"><img src="${esc(srcFoto(p.imagen))}" alt="" loading="lazy" onerror="this.remove()"></div>
         <div class="item__info">
           <p class="item__nombre${p.nombre ? "" : " item__nombre--vacio"}">${esc(p.nombre || `Sin nombre · ref. ${p.id}`)}</p>
-          <p class="item__precio">${p.referencia ? `Ref. ${esc(p.referencia)} · ` : ""}${p.precio ? formatoCOP.format(p.precio) : "Precio a consultar"}${p.agotado ? '<span class="item__tag">Agotado</span>' : ""}${p.oculto ? '<span class="item__tag">Oculto</span>' : ""}</p>
+          <p class="item__precio">${p.referencia ? `${esc(p.referencia)} · ` : ""}${p.precio ? formatoCOP.format(p.precio) : "Precio a consultar"}${p.agotado ? '<span class="item__tag">Agotado</span>' : ""}${p.oculto ? '<span class="item__tag">Oculto</span>' : ""}</p>
         </div>
         <div class="item__acciones">
           <button class="icono" data-accion="subir" title="Subir" aria-label="Subir" ${buscando || i === 0 ? "disabled" : ""}>↑</button>
