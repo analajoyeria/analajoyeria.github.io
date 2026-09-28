@@ -162,7 +162,7 @@ function abrirModal(p) {
 
   document.getElementById("modalCat").textContent = p.categoria;
   document.getElementById("modalNombre").textContent = p.nombre || "";
-  document.getElementById("modalRef").textContent = p.referencia || "";
+  document.getElementById("modalRef").textContent = p.referencia ? `Ref. ${p.referencia}` : "";
   document.getElementById("modalPrecio").textContent = precioTexto(p);
   document.getElementById("modalAccion").innerHTML = botonPedido(p);
   modal.classList.toggle("agotado", !!p.agotado);
