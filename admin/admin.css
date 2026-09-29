@@ -125,6 +125,13 @@ input:focus, select:focus { outline: 2px solid var(--oro); outline-offset: 1px; 
 .tarjeta { background: #fff; border: 1px solid var(--crema); border-radius: 16px; padding: 20px; max-width: 480px; }
 .tarjeta .btn { margin-top: 20px; width: 100%; }
 
+.tarjeta--ancha { max-width: 720px; }
+.tarjeta--ancha .btn { margin: 16px 0 4px; }
+.envios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+@media (min-width: 600px) { .envios-grid { grid-template-columns: repeat(4, 1fr); } }
+.envios-grid .extra { aspect-ratio: 3 / 4; }
+.envios-grid .extra button { width: 30px; height: 30px; font-size: 1.1rem; }
+
 /* ---------- Barra de orden ---------- */
 .orden {
   position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 6;

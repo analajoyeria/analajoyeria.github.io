@@ -17,6 +17,7 @@ const estado = {
   categorias: [],         // [{ nombre, archivo, carpeta }]
   listas: {},             // archivo -> { sha, items: [...] }
   config: { sha: null, datos: {} },
+  envios: [],             // fotos de "Así llega tu pedido": [{ imagen }]
   catActual: null,        // archivo de la categoría abierta, o "__config"
   ordenOriginal: null,    // ids antes de reordenar (para descartar)
 };
@@ -267,6 +268,12 @@ async function cargarTodo() {
     estado.categorias.forEach((c, i) => {
       estado.listas[c.archivo] = { sha: listas[i].sha, items: JSON.parse(listas[i].texto) };
     });
+    try {
+      estado.envios = JSON.parse((await leerArchivo("envios.json")).texto);
+    } catch (e) {
+      if (e.status !== 404) throw e;
+      estado.envios = [];
+    }
     if (!estado.catActual) estado.catActual = estado.categorias[0].archivo;
     pintarTabs();
     abrirVista(estado.catActual);
@@ -287,7 +294,8 @@ function pintarTabs() {
     estado.categorias.map(c =>
       `<button class="tab${c.archivo === estado.catActual ? " activo" : ""}" data-cat="${esc(c.archivo)}">${esc(c.nombre)} (${estado.listas[c.archivo].items.length})</button>`
     ).join("") +
-    `<button class="tab tab--config${estado.catActual === "__config" ? " activo" : ""}" data-cat="__config">⚙ Configuración</button>`;
+    `<button class="tab tab--config${estado.catActual === "__envios" ? " activo" : ""}" data-cat="__envios">📦 Envíos (${estado.envios.length})</button>` +
+    `<button class="tab${estado.catActual === "__config" ? " activo" : ""}" data-cat="__config">⚙ Configuración</button>`;
 }
 
 $("tabs").addEventListener("click", e => {
@@ -302,9 +310,13 @@ function abrirVista(cat) {
   estado.catActual = cat;
   pintarTabs();
   const esConfig = cat === "__config";
-  $("vistaProductos").hidden = esConfig;
+  const esEnvios = cat === "__envios";
+  $("vistaProductos").hidden = esConfig || esEnvios;
   $("vistaConfig").hidden = !esConfig;
-  if (esConfig) {
+  $("vistaEnvios").hidden = !esEnvios;
+  if (esEnvios) {
+    pintarEnvios();
+  } else if (esConfig) {
     $("cfgWhatsapp").value = estado.config.datos.whatsapp || "";
     $("cfgInstagram").value = estado.config.datos.instagram || "";
     $("cfgFacebook").value = estado.config.datos.facebook || "";
@@ -587,6 +599,94 @@ async function borrarFotosSinUso(rutas, etiqueta) {
     }
   }
 }
+
+// ---------------------------------------------------------------------
+//  Fotos de envíos ("Así llega tu pedido")
+// ---------------------------------------------------------------------
+function pintarEnvios() {
+  const n = estado.envios.length;
+  $("enviosContador").textContent = n ? `${n} foto${n === 1 ? "" : "s"}` : "Todavía no hay fotos. Mientras no haya, la sección no se muestra en el catálogo.";
+  $("enviosLista").innerHTML = estado.envios.map((f, i) => `
+    <div class="extra">
+      <img src="${esc(srcFoto(f.imagen))}" alt="" loading="lazy" onerror="this.remove()">
+      <button type="button" data-i="${i}" aria-label="Eliminar foto">×</button>
+    </div>`).join("");
+}
+
+// Lee la versión más reciente de envios.json, le aplica "cambio" y la guarda
+async function actualizarEnvios(cambio, mensaje) {
+  for (let intento = 0; intento < 2; intento++) {
+    let sha = null, items = [];
+    try {
+      const actual = await leerArchivo("envios.json");
+      sha = actual.sha;
+      items = JSON.parse(actual.texto);
+    } catch (e) {
+      if (e.status !== 404) throw e;
+    }
+    cambio(items);
+    try {
+      await escribirArchivo("envios.json", textoABase64(JSON.stringify(items, null, 2) + "\n"), sha, mensaje);
+      estado.envios = items;
+      return;
+    } catch (e) {
+      if ((e.status === 409 || e.status === 422) && intento === 0) continue;
+      throw e;
+    }
+  }
+}
+
+$("inEnvios").addEventListener("change", async e => {
+  const archivos = [...e.target.files];
+  e.target.value = "";
+  if (!archivos.length) return;
+  const nuevas = [];
+  try {
+    for (let i = 0; i < archivos.length; i++) {
+      cargando(`Subiendo foto ${i + 1} de ${archivos.length}…`);
+      const { blob, ext } = await procesarFoto(archivos[i]);
+      const ruta = `img/envios/envio-${Date.now().toString(36)}${i + 1}.${ext}`;
+      await escribirArchivo(ruta, await blobABase64(blob), null, "Foto de envío");
+      previasLocales[ruta] = URL.createObjectURL(archivos[i]);
+      nuevas.push({ imagen: ruta });
+    }
+    cargando("Guardando…");
+    await actualizarEnvios(items => items.push(...nuevas), `Agregar ${nuevas.length} foto${nuevas.length === 1 ? "" : "s"} de envío`);
+    pintarTabs();
+    pintarEnvios();
+    aviso("Fotos agregadas. Se verán en el catálogo en 1–2 minutos.");
+  } catch (err) {
+    manejarError(err);
+  } finally {
+    cargando(null);
+  }
+});
+
+$("enviosLista").addEventListener("click", async e => {
+  const btn = e.target.closest("button[data-i]");
+  if (!btn) return;
+  const foto = estado.envios[Number(btn.dataset.i)];
+  if (!foto || !(await confirmar("¿Eliminar esta foto de \"Así llega tu pedido\"?"))) return;
+  cargando("Eliminando…");
+  try {
+    await actualizarEnvios(items => {
+      const i = items.findIndex(f => f.imagen === foto.imagen);
+      if (i !== -1) items.splice(i, 1);
+    }, "Eliminar foto de envío");
+    try {
+      await borrarArchivo(rutaArchivo(foto.imagen), "Eliminar foto de envío");
+    } catch (err) {
+      console.warn("No se pudo borrar el archivo", err); // la foto ya no sale en el catálogo
+    }
+    pintarTabs();
+    pintarEnvios();
+    aviso("Foto eliminada.");
+  } catch (err) {
+    manejarError(err);
+  } finally {
+    cargando(null);
+  }
+});
 
 // ---------------------------------------------------------------------
 //  Eliminar producto

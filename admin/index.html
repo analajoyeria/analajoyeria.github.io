@@ -48,6 +48,20 @@
       <ul class="lista" id="lista"></ul>
     </main>
 
+    <!-- Fotos de envíos ("Así llega tu pedido") -->
+    <main class="contenido" id="vistaEnvios" hidden>
+      <div class="tarjeta tarjeta--ancha">
+        <h2>Así llega tu pedido 📦</h2>
+        <small>Estas fotos salen al final del catálogo. Toca × para eliminar una.</small>
+        <label class="btn btn--file">
+          + Agregar fotos
+          <input type="file" id="inEnvios" accept="image/*" multiple hidden>
+        </label>
+        <p class="contador" id="enviosContador"></p>
+        <div class="envios-grid" id="enviosLista"></div>
+      </div>
+    </main>
+
     <!-- Configuración -->
     <main class="contenido" id="vistaConfig" hidden>
       <form class="tarjeta" id="formConfig">
