@@ -44,8 +44,13 @@ function precioTexto(p) {
   return p.precio ? formatoCOP.format(p.precio) : "Precio a consultar";
 }
 
+// Link directo al producto: abre el catálogo con ese producto ya abierto
+function urlProducto(p) {
+  return `${location.origin}${location.pathname}?producto=${p.id}`;
+}
+
 function linkPedido(p) {
-  return linkWhatsApp(`¡Hola Anala Joyería! Me interesa: ${etiqueta(p)}${p.referencia ? ` (Ref. ${p.referencia})` : ""}${p.precio ? ` (${formatoCOP.format(p.precio)})` : ""}. ¿Está disponible?`);
+  return linkWhatsApp(`¡Hola Anala Joyería! Me interesa: ${etiqueta(p)}${p.referencia ? ` (Ref. ${p.referencia})` : ""}${p.precio ? ` (${formatoCOP.format(p.precio)})` : ""}. ¿Está disponible?\n\n${urlProducto(p)}`);
 }
 
 function botonPedido(p) {
@@ -130,6 +135,11 @@ new Set(PRODUCTOS.map(p => p.imagen)).forEach(src => {
 });
 
 render();
+
+// Si llegaron desde un link de producto (?producto=ID), abrirlo de una
+const idLink = Number(new URLSearchParams(location.search).get("producto"));
+const productoLink = idLink && PRODUCTOS.find(p => p.id === idLink);
+if (productoLink) abrirModal(productoLink);
 }
 
 buscar.addEventListener("input", render);
@@ -353,6 +363,10 @@ modal.addEventListener("cancel", e => {
 // Si el sistema cierra el modal de todas formas, el visor se destruye con él
 modal.addEventListener("close", () => { if (visor) visor.destroy(); });
 modal.addEventListener("close", () => document.documentElement.classList.remove("sin-scroll"));
+// Al cerrar el producto, quita el ?producto= de la dirección para que al recargar no se vuelva a abrir
+modal.addEventListener("close", () => {
+  if (location.search.includes("producto=")) history.replaceState(null, "", location.pathname);
+});
 
 cargarDatos()
   .then(iniciar)
