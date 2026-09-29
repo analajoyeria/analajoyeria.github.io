@@ -20,7 +20,7 @@
   {"id":165,"nombre":"CADENA CUBANA 60 CM Y DIJE CRUZ VERDE","precio":285000,"imagen":"img/productos/cadenasdije/CADENACUBANA60CMYDIJECRUZVERDE.webp"},
   {"id":155,"nombre":"CADENA CARTIER 60 CM Y DIJE SAN BENITO","precio":295000,"imagen":"img/productos/cadenasdije/CADENACARTIER60CMYDIJESANBENITO.webp"},
   {"id":156,"nombre":"CADENA CARTIER DE 60 CM Y DIJE CRUZ CRISTO","precio":305000,"imagen":"img/productos/cadenasdije/CADENACARTIERDE60CMYDIJECRUZCRISTO.webp"},
-  {"id":157,"nombre":"CADENA CARTIER DE 60 CM Y DIJE ROLEX","precio":310000,"imagen":"img/productos/cadenasdije/CADENACARTIERDE60CMYDIJEROLEX.webp"},
+  {"id":157,"nombre":"CADENA CARTIER DE 60 CM Y DIJE ROLEX","precio":310000,"imagen":"img/productos/cadenasdije/CADENACARTIERDE60CMYDIJEROLEX.webp","imagenes":["img/productos/cadenasdije/CADENACARTIERDE60CMYDIJEROLEX.webp","img/productos/cadenasdije/cadena-cartier-de-60-cm-y-dije-rolex-mum8ledz1.webp"]},
   {"id":158,"nombre":"CADENA CARTIER DE 60 CM Y DIJE VIRGEN CIRCON VERDE","precio":310000,"imagen":"img/productos/cadenasdije/CADENACARTIERDE60CMYDIJEVIRGENCIRCONVERDE.webp"},
   {"id":175,"nombre":"CADENA MILITAR DIAMANTADA DE 60 CM Y DIJE VIRGEN CIRCONADA","precio":365000,"imagen":"img/productos/cadenasdije/CADENAMILITARDIAMANTADADE60CMYDIJEVIRENCIRCONADA.webp"},
   {"id":160,"nombre":"CADENA CHINESCA DE 60 CM Y DIJE GUADALUPE DIAMANTADA","precio":465000,"imagen":"img/productos/cadenasdije/CADENACHINESCADE60CMYDIJEGUADALUPEDIAMANTADA.webp"},
