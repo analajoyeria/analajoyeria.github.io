@@ -295,6 +295,7 @@ function pintarTabs() {
       `<button class="tab${c.archivo === estado.catActual ? " activo" : ""}" data-cat="${esc(c.archivo)}">${esc(c.nombre)} (${estado.listas[c.archivo].items.length})</button>`
     ).join("") +
     `<button class="tab tab--config${estado.catActual === "__envios" ? " activo" : ""}" data-cat="__envios">📦 Envíos (${estado.envios.length})</button>` +
+    `<button class="tab${estado.catActual === "__categorias" ? " activo" : ""}" data-cat="__categorias">🗂 Categorías</button>` +
     `<button class="tab${estado.catActual === "__config" ? " activo" : ""}" data-cat="__config">⚙ Configuración</button>`;
 }
 
@@ -311,15 +312,17 @@ function abrirVista(cat) {
   pintarTabs();
   const esConfig = cat === "__config";
   const esEnvios = cat === "__envios";
-  $("vistaProductos").hidden = esConfig || esEnvios;
+  const esCategorias = cat === "__categorias";
+  $("vistaProductos").hidden = esConfig || esEnvios || esCategorias;
   $("vistaConfig").hidden = !esConfig;
   $("vistaEnvios").hidden = !esEnvios;
+  $("vistaCategorias").hidden = !esCategorias;
   if (esEnvios) {
     pintarEnvios();
+  } else if (esCategorias) {
+    pintarCategorias();
   } else if (esConfig) {
-    $("cfgWhatsapp").value = estado.config.datos.whatsapp || "";
-    $("cfgInstagram").value = estado.config.datos.instagram || "";
-    $("cfgFacebook").value = estado.config.datos.facebook || "";
+    llenarConfig();
   } else {
     $("buscar").value = "";
     pintarLista();
@@ -610,6 +613,10 @@ function pintarEnvios() {
     <div class="extra">
       <img src="${esc(srcFoto(f.imagen))}" alt="" loading="lazy" onerror="this.remove()">
       <button type="button" data-i="${i}" aria-label="Eliminar foto">×</button>
+      <div class="mover">
+        <button type="button" data-mover="-1" data-pos="${i}" aria-label="Mover antes" ${i === 0 ? "disabled" : ""}>←</button>
+        <button type="button" data-mover="1" data-pos="${i}" aria-label="Mover después" ${i === n - 1 ? "disabled" : ""}>→</button>
+      </div>
     </div>`).join("");
 }
 
@@ -663,6 +670,25 @@ $("inEnvios").addEventListener("change", async e => {
 });
 
 $("enviosLista").addEventListener("click", async e => {
+  const mover = e.target.closest("button[data-mover]");
+  if (mover) {
+    const i = Number(mover.dataset.pos), j = i + Number(mover.dataset.mover);
+    const a = estado.envios[i], b = estado.envios[j];
+    if (!a || !b) return;
+    cargando("Guardando orden…");
+    try {
+      await actualizarEnvios(items => {
+        const x = items.findIndex(f => f.imagen === a.imagen), y = items.findIndex(f => f.imagen === b.imagen);
+        if (x !== -1 && y !== -1) [items[x], items[y]] = [items[y], items[x]];
+      }, "Reordenar fotos de envío");
+      pintarEnvios();
+    } catch (err) {
+      manejarError(err);
+    } finally {
+      cargando(null);
+    }
+    return;
+  }
   const btn = e.target.closest("button[data-i]");
   if (!btn) return;
   const foto = estado.envios[Number(btn.dataset.i)];
@@ -685,6 +711,137 @@ $("enviosLista").addEventListener("click", async e => {
     manejarError(err);
   } finally {
     cargando(null);
+  }
+});
+
+// ---------------------------------------------------------------------
+//  Categorías
+// ---------------------------------------------------------------------
+function pintarCategorias() {
+  const cats = estado.categorias;
+  $("listaCats").innerHTML = cats.map((c, i) => {
+    const n = estado.listas[c.archivo]?.items.length || 0;
+    return `
+      <li class="cat" data-archivo="${esc(c.archivo)}">
+        <span class="cat__nombre">${esc(c.nombre)}<small>(${n})</small></span>
+        <button class="icono" data-accion="subir" aria-label="Subir" ${i === 0 ? "disabled" : ""}>↑</button>
+        <button class="icono" data-accion="bajar" aria-label="Bajar" ${i === cats.length - 1 ? "disabled" : ""}>↓</button>
+        <button class="icono" data-accion="renombrar" aria-label="Cambiar nombre">✎</button>
+        <button class="icono icono--borrar" data-accion="borrar" aria-label="Eliminar">🗑</button>
+      </li>`;
+  }).join("");
+}
+
+// Lee la versión más reciente de categorias.json, le aplica "cambio" y la guarda
+async function actualizarCategorias(cambio, mensaje) {
+  const actual = await leerArchivo("productos/categorias.json");
+  const cats = JSON.parse(actual.texto);
+  cambio(cats);
+  await escribirArchivo("productos/categorias.json", textoABase64(JSON.stringify(cats, null, 2) + "\n"), actual.sha, mensaje);
+  estado.categorias = cats;
+}
+
+function nombreRepetido(nombre, excepto) {
+  return estado.categorias.some(c => c.archivo !== excepto && slug(c.nombre) === slug(nombre));
+}
+
+async function accionCategoria(texto, fn) {
+  cargando(texto);
+  try {
+    await fn();
+    pintarTabs();
+    pintarCategorias();
+    return true;
+  } catch (err) {
+    manejarError(err);
+    return false;
+  } finally {
+    cargando(null);
+  }
+}
+
+$("formNuevaCat").addEventListener("submit", async e => {
+  e.preventDefault();
+  const nombre = $("nuevaCat").value.trim().replace(/\s+/g, " ");
+  if (!nombre) return;
+  if (nombreRepetido(nombre)) return aviso("Ya existe una categoría con ese nombre.", true);
+  let archivo = slug(nombre), n = 2;
+  while (estado.categorias.some(c => c.archivo === archivo)) archivo = `${slug(nombre)}-${n++}`;
+  const ok = await accionCategoria("Creando categoría…", async () => {
+    try {
+      await escribirArchivo(`productos/${archivo}.json`, textoABase64("[]\n"), null, `Nueva categoría: ${nombre}`);
+    } catch (err) {
+      if (err.status !== 422) throw err; // 422 = el archivo ya existía (lo reutilizamos)
+    }
+    estado.listas[archivo] = { sha: null, items: JSON.parse((await leerArchivo(`productos/${archivo}.json`)).texto) };
+    await actualizarCategorias(cats => cats.push({ nombre, archivo, carpeta: `img/productos/${archivo}` }), `Nueva categoría: ${nombre}`);
+  });
+  if (ok) {
+    $("nuevaCat").value = "";
+    aviso(`Categoría "${nombre}" creada. Ya puedes agregarle productos.`);
+  }
+});
+
+$("listaCats").addEventListener("click", async e => {
+  const btn = e.target.closest("[data-accion]");
+  if (!btn) return;
+  const li = btn.closest(".cat");
+  const archivo = li.dataset.archivo;
+  const cat = categoriaDe(archivo);
+  const i = estado.categorias.indexOf(cat);
+  const accion = btn.dataset.accion;
+
+  if (accion === "subir" || accion === "bajar") {
+    const j = i + (accion === "subir" ? -1 : 1);
+    const otro = estado.categorias[j];
+    await accionCategoria("Guardando orden…", () => actualizarCategorias(cats => {
+      const x = cats.findIndex(c => c.archivo === archivo), y = cats.findIndex(c => c.archivo === otro.archivo);
+      if (x !== -1 && y !== -1) [cats[x], cats[y]] = [cats[y], cats[x]];
+    }, "Reordenar categorías"));
+  }
+
+  if (accion === "renombrar") {
+    li.innerHTML = `
+      <input value="${esc(cat.nombre)}" aria-label="Nuevo nombre">
+      <button class="icono" data-accion="guardarNombre" aria-label="Guardar">✓</button>
+      <button class="icono" data-accion="cancelar" aria-label="Cancelar">×</button>`;
+    li.querySelector("input").focus();
+  }
+
+  if (accion === "cancelar") pintarCategorias();
+
+  if (accion === "guardarNombre") {
+    const nombre = li.querySelector("input").value.trim().replace(/\s+/g, " ");
+    if (!nombre || nombre === cat.nombre) return pintarCategorias();
+    if (nombreRepetido(nombre, archivo)) return aviso("Ya existe una categoría con ese nombre.", true);
+    const ok = await accionCategoria("Guardando nombre…", () => actualizarCategorias(cats => {
+      const c = cats.find(c => c.archivo === archivo);
+      if (c) c.nombre = nombre;
+    }, `Renombrar categoría: ${cat.nombre} → ${nombre}`));
+    if (ok) aviso("Nombre actualizado. Se verá en el catálogo en 1–2 minutos.");
+  }
+
+  if (accion === "borrar") {
+    const n = estado.listas[archivo]?.items.length || 0;
+    if (n) return aviso(`"${cat.nombre}" tiene ${n} producto${n === 1 ? "" : "s"}. Muévelos a otra categoría o elimínalos primero.`, true);
+    if (!(await confirmar(`¿Eliminar la categoría "${cat.nombre}"?`))) return;
+    const ok = await accionCategoria("Eliminando categoría…", async () => {
+      await actualizarCategorias(cats => {
+        const x = cats.findIndex(c => c.archivo === archivo);
+        if (x !== -1) cats.splice(x, 1);
+      }, `Eliminar categoría: ${cat.nombre}`);
+      delete estado.listas[archivo];
+      await borrarArchivo(`productos/${archivo}.json`, `Eliminar categoría: ${cat.nombre}`);
+    });
+    if (ok) aviso("Categoría eliminada.");
+  }
+});
+
+// Evita que el Enter del campo de renombrar envíe otra cosa
+$("listaCats").addEventListener("keydown", e => {
+  if (e.key === "Enter" && e.target.matches("input")) {
+    e.preventDefault();
+    e.target.closest(".cat").querySelector('[data-accion="guardarNombre"]').click();
   }
 });
 
@@ -728,6 +885,39 @@ async function eliminarProducto(p) {
 // ---------------------------------------------------------------------
 //  Configuración
 // ---------------------------------------------------------------------
+// Logos elegidos pero todavía no guardados
+const logosNuevos = { logo: null, logoMini: null };
+
+function prevLogo(id, src) {
+  $(id).innerHTML = src ? `<img src="${esc(src)}" alt="">` : "✦";
+}
+
+function llenarConfig() {
+  const d = estado.config.datos, t = d.textos || {};
+  $("cfgWhatsapp").value = d.whatsapp || "";
+  $("cfgInstagram").value = d.instagram || "";
+  $("cfgFacebook").value = d.facebook || "";
+  $("cfgInfo").value = (t.info || []).join("\n");
+  $("cfgProducto").value = (t.producto || []).join("\n");
+  $("cfgEnviosTitulo").value = t.enviosTitulo || "";
+  $("cfgEnviosTexto").value = t.enviosTexto || "";
+  logosNuevos.logo = logosNuevos.logoMini = null;
+  prevLogo("prevLogo", srcFoto(d.logo || "img/logo.webp"));
+  prevLogo("prevLogoMini", srcFoto(d.logoMini || "img/logo-a.webp"));
+}
+
+[["inLogo", "logo", "prevLogo"], ["inLogoMini", "logoMini", "prevLogoMini"]].forEach(([input, clave, prev]) => {
+  $(input).addEventListener("change", e => {
+    const archivo = e.target.files[0];
+    e.target.value = "";
+    if (!archivo) return;
+    logosNuevos[clave] = archivo;
+    prevLogo(prev, URL.createObjectURL(archivo));
+  });
+});
+
+const lineas = txt => txt.split("\n").map(l => l.trim()).filter(Boolean);
+
 $("formConfig").addEventListener("submit", async e => {
   e.preventDefault();
   const whatsapp = $("cfgWhatsapp").value.replace(/[^\d]/g, "");
@@ -736,11 +926,31 @@ $("formConfig").addEventListener("submit", async e => {
   if (whatsapp.length < 11 || whatsapp.length > 15) return aviso("Revisa el número: debe llevar el 57 adelante, ej. 573001234567.", true);
   cargando("Guardando configuración…");
   try {
+    const cambiosLogo = {};
+    for (const clave of ["logo", "logoMini"]) {
+      const archivo = logosNuevos[clave];
+      if (!archivo) continue;
+      cargando("Subiendo logo…");
+      const { blob, ext } = await procesarFoto(archivo);
+      const ruta = `img/${clave === "logo" ? "logo" : "logo-mini"}-${Date.now().toString(36)}.${ext}`;
+      await escribirArchivo(ruta, await blobABase64(blob), null, "Nuevo logo");
+      previasLocales[ruta] = URL.createObjectURL(archivo);
+      cambiosLogo[clave] = ruta;
+    }
+    cargando("Guardando configuración…");
     const actual = await leerArchivo("config.json");
-    const datos = { ...JSON.parse(actual.texto), whatsapp, instagram, facebook };
+    const previo = JSON.parse(actual.texto);
+    const textos = {
+      ...(previo.textos || {}),
+      info: lineas($("cfgInfo").value),
+      producto: lineas($("cfgProducto").value),
+      enviosTitulo: $("cfgEnviosTitulo").value.trim(),
+      enviosTexto: $("cfgEnviosTexto").value.trim(),
+    };
+    const datos = { ...previo, whatsapp, instagram, facebook, textos, ...cambiosLogo };
     const sha = await escribirArchivo("config.json", textoABase64(JSON.stringify(datos, null, 2) + "\n"), actual.sha, "Actualizar configuración");
     estado.config = { sha, datos };
-    $("cfgWhatsapp").value = whatsapp;
+    llenarConfig();
     aviso("Configuración guardada. Se verá en el catálogo en 1–2 minutos.");
   } catch (err) {
     manejarError(err);

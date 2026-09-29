@@ -62,6 +62,19 @@
       </div>
     </main>
 
+    <!-- Categorías -->
+    <main class="contenido" id="vistaCategorias" hidden>
+      <div class="tarjeta tarjeta--ancha">
+        <h2>Categorías</h2>
+        <small>El orden de esta lista es el orden de los filtros en el catálogo. Una categoría sin productos no se muestra.</small>
+        <form class="barra barra--cat" id="formNuevaCat">
+          <input id="nuevaCat" placeholder="Nombre de la nueva categoría" required>
+          <button class="btn" type="submit">+ Crear</button>
+        </form>
+        <ul class="lista" id="listaCats"></ul>
+      </div>
+    </main>
+
     <!-- Configuración -->
     <main class="contenido" id="vistaConfig" hidden>
       <form class="tarjeta" id="formConfig">
@@ -73,6 +86,32 @@
         <input id="cfgInstagram" type="url" placeholder="https://instagram.com/..." required>
         <label for="cfgFacebook">Link de Facebook</label>
         <input id="cfgFacebook" type="url" placeholder="https://facebook.com/...">
+
+        <h3 class="subtitulo">Textos de la página</h3>
+        <small>Una línea por renglón. Escribe <b>**así**</b> para negrita. Un <b>@usuario</b> lleva al Instagram.</small>
+        <label for="cfgInfo">Información debajo del logo</label>
+        <textarea id="cfgInfo" rows="6"></textarea>
+        <label for="cfgProducto">Información al abrir un producto</label>
+        <textarea id="cfgProducto" rows="7"></textarea>
+        <label for="cfgEnviosTitulo">Título de "Así llega tu pedido"</label>
+        <input id="cfgEnviosTitulo">
+        <label for="cfgEnviosTexto">Frase debajo de las fotos de envíos</label>
+        <input id="cfgEnviosTexto">
+
+        <h3 class="subtitulo">Logo</h3>
+        <div class="logos">
+          <div>
+            <label>Logo grande</label>
+            <div class="logo-prev" id="prevLogo"></div>
+            <label class="btn btn--sec btn--file">Cambiar<input type="file" id="inLogo" accept="image/*" hidden></label>
+          </div>
+          <div>
+            <label>Logo pequeño (arriba)</label>
+            <div class="logo-prev logo-prev--mini" id="prevLogoMini"></div>
+            <label class="btn btn--sec btn--file">Cambiar<input type="file" id="inLogoMini" accept="image/*" hidden></label>
+          </div>
+        </div>
+
         <button class="btn" type="submit">Guardar configuración</button>
       </form>
     </main>

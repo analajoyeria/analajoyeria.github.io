@@ -1,5 +1,27 @@
 {
   "whatsapp": "573183849156",
   "instagram": "https://www.instagram.com/anala.joyeria?stkn=YnU3dHJ3djVrYXNp",
-  "facebook": "https://www.facebook.com/profile.php?id=61594230486484&locale=es_LA"
+  "facebook": "https://www.facebook.com/profile.php?id=61594230486484&locale=es_LA",
+  "logo": "img/logo.webp",
+  "logoMini": "img/logo-a.webp",
+  "textos": {
+    "info": [
+      "⭐ Joyería en **oro laminado 18K**",
+      "✅ **2 años de garantía** por cambio de tonalidad",
+      "📍 Tienda virtual en **Cali**",
+      "🛵 Domicilios en Cali con **pago contra entrega**",
+      "🇨🇴 Envíos nacionales a toda Colombia"
+    ],
+    "producto": [
+      "ORO LAMINADO 18K ⚜️",
+      "El color que tú elijas y el modelo que tú escojas.",
+      "Garantía de 2 años ✅",
+      "Envíos nacionales 🇨🇴",
+      "Manejamos pago contra entrega 🚚",
+      "Instagram @anala.joyeria",
+      "Estamos ubicados en Cali"
+    ],
+    "enviosTitulo": "Así llega tu pedido 📦",
+    "enviosTexto": "Cada pedido va protegido y listo para regalar 🎁"
+  }
 }

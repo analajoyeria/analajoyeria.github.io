@@ -59,6 +59,32 @@ function fotosDe(p) {
   return p.imagenes && p.imagenes.length ? p.imagenes : [p.imagen];
 }
 
+// ---------- Textos y logos editables desde el panel (config.json) ----------
+// En los textos, **así** queda en negrita y un @usuario enlaza al Instagram.
+function lineaHTML(txt) {
+  return String(txt)
+    .replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]))
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|\s)@([\w.]+)/g, (m, pre, user) =>
+      CONFIG.instagram ? `${pre}<a href="${CONFIG.instagram}" target="_blank" rel="noopener">@${user}</a>` : m);
+}
+
+function aplicarTextosYLogos() {
+  const t = CONFIG.textos || {};
+  const lista = (id, lineas) => {
+    if (Array.isArray(lineas)) document.getElementById(id).innerHTML = lineas.filter(l => l.trim()).map(l => `<li>${lineaHTML(l)}</li>`).join("");
+  };
+  lista("heroInfo", t.info);
+  lista("modalDesc", t.producto);
+  if (t.enviosTitulo) document.getElementById("enviosTitulo").innerHTML = lineaHTML(t.enviosTitulo);
+  if (t.enviosTexto !== undefined) document.getElementById("enviosTexto").innerHTML = lineaHTML(t.enviosTexto);
+  if (CONFIG.logo) document.getElementById("logoGrande").src = CONFIG.logo;
+  if (CONFIG.logoMini) {
+    document.getElementById("logoMini").src = CONFIG.logoMini;
+    document.getElementById("favicon").href = CONFIG.logoMini;
+  }
+}
+
 function iniciar() {
 // Enlaces generales
 const waGeneral = linkWhatsApp("¡Hola Anala Joyería! Quiero información sobre el catálogo.");
@@ -70,6 +96,8 @@ if (CONFIG.facebook) {
   document.getElementById("facebookWrap").hidden = false;
 }
 document.getElementById("anio").textContent = new Date().getFullYear();
+
+aplicarTextosYLogos();
 
 // Datos de contacto debajo del logo
 document.getElementById("heroWa").href = waGeneral;

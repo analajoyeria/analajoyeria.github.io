@@ -132,6 +132,23 @@ input:focus, select:focus { outline: 2px solid var(--oro); outline-offset: 1px; 
 .envios-grid .extra { aspect-ratio: 3 / 4; }
 .envios-grid .extra button { width: 30px; height: 30px; font-size: 1.1rem; }
 
+.subtitulo { font-family: "Cinzel", serif; font-weight: 500; font-size: 1rem; color: var(--oro-oscuro); margin: 26px 0 4px; padding-top: 16px; border-top: 1px solid var(--crema); }
+textarea { width: 100%; font: inherit; padding: 11px 12px; border: 1px solid var(--oro-claro); border-radius: 10px; background: #fff; color: var(--texto); resize: vertical; line-height: 1.5; }
+textarea:focus { outline: 2px solid var(--oro); outline-offset: 1px; }
+.logos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.logos > div > label:first-child { min-height: 2.8em; display: flex; align-items: flex-end; }
+.logo-prev { aspect-ratio: 4 / 3; border: 1px solid var(--crema); border-radius: 10px; background: #fff; display: grid; place-items: center; overflow: hidden; }
+.logo-prev img { max-width: 90%; max-height: 90%; object-fit: contain; }
+.logo-prev--mini img { max-width: 50%; }
+.barra--cat { margin: 14px 0 12px; }
+.cat { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--crema); border-radius: var(--radio); padding: 8px 8px 8px 12px; }
+.cat__nombre { flex: 1; min-width: 0; font-weight: 500; }
+.cat__nombre small { font-weight: 300; margin-left: 4px; }
+.cat input { flex: 1; min-width: 0; padding: 8px 10px; }
+.extra .mover { position: absolute; bottom: 4px; left: 4px; right: 4px; display: flex; justify-content: space-between; }
+.extra .mover button { position: static; width: 28px; height: 28px; }
+.extra .mover button:disabled { opacity: .3; }
+
 /* ---------- Barra de orden ---------- */
 .orden {
   position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 6;
