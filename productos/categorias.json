@@ -25,14 +25,14 @@
     "carpeta": "img/productos/cadenas"
   },
   {
-    "nombre": "Cadenas con dije",
-    "archivo": "cadenas-con-dije",
-    "carpeta": "img/productos/cadenasdije"
-  },
-  {
     "nombre": "Candongas",
     "archivo": "candongas",
     "carpeta": "img/productos/candongas"
+  },
+  {
+    "nombre": "Cadenas con dije",
+    "archivo": "cadenas-con-dije",
+    "carpeta": "img/productos/cadenasdije"
   },
   {
     "nombre": "Pulseras",
