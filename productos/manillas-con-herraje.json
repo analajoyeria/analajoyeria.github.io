@@ -1,7 +1,7 @@
 [
   {"id":29,"nombre":"MANILLA SAN BENITO BALIN # 4","referencia":"274570005","precio":89000,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-9.webp"},
   {"id":25,"nombre":"MANILLA VF DORADA","referencia":"274970005","precio":95000,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-5.webp"},
-  {"id":241,"nombre":"MANILLA BALIN #4 MANO TURCA","referencia":"276610001","precio":110000,"imagen":"img/productos/manillas-con-herraje/manilla-balin-4-mano-turca-mum8r14h1.webp","imagenes":["img/productos/manillas-con-herraje/manilla-balin-4-mano-turca-mum8r14h1.webp","img/productos/manillas-con-herraje/manilla-balin-4-mano-turca-mum8r2x82.webp"]},
+  {"id":241,"nombre":"MANILLA BALIN #4 MANO TURCA","referencia":"276770001","precio":120000,"imagen":"img/productos/manillas-con-herraje/manilla-balin-4-mano-turca-mum8r14h1.webp","imagenes":["img/productos/manillas-con-herraje/manilla-balin-4-mano-turca-mum8r14h1.webp","img/productos/manillas-con-herraje/manilla-balin-4-mano-turca-mum8r2x82.webp"]},
   {"id":30,"nombre":"MANILLA BOLSA DINERO BALIN # 4","referencia":"275970005","precio":110000,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-10.webp"},
   {"id":24,"nombre":"MANILLA VF VERDE","referencia":"276170005","precio":115000,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-4.webp"},
   {"id":27,"nombre":"MANILLA SAN BENITO","referencia":"276250005","precio":115000,"imagen":"img/productos/manillas-con-herraje/manilla-con-herraje-7.webp"},
