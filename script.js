@@ -268,6 +268,54 @@ modalFotos.addEventListener("click", async e => {
   visor.init();
 });
 
+// ---------- Así llega tu pedido ----------
+const enviosFotos = document.getElementById("enviosFotos");
+
+async function cargarEnvios() {
+  try {
+    const fotos = await leerJSON("envios.json");
+    if (!fotos.length) return;
+    enviosFotos.innerHTML = fotos.map((f, i) => `
+      <button class="envios__foto" data-i="${i}" aria-label="Ver foto de envío ${i + 1}">
+        <img src="${f.imagen}" alt="${f.texto || `Empaque de pedido Anala ${i + 1}`}" loading="lazy">
+      </button>`).join("");
+    document.getElementById("envios").hidden = false;
+  } catch (e) {
+    console.warn(e); // si no carga, la sección simplemente no se muestra
+  }
+}
+
+enviosFotos.addEventListener("click", async e => {
+  const btn = e.target.closest(".envios__foto");
+  if (!btn || visor) return;
+  const imgs = [...enviosFotos.querySelectorAll("img")];
+  const [{ default: PhotoSwipe }, tamanos] = await Promise.all([
+    import(PHOTOSWIPE_URL),
+    Promise.all(imgs.map(tamanoFoto)),
+  ]);
+  visor = new PhotoSwipe({
+    dataSource: imgs.map((img, i) => ({
+      src: img.currentSrc || img.src,
+      width: tamanos[i].naturalWidth || 900,
+      height: tamanos[i].naturalHeight || 1200,
+      alt: img.alt,
+    })),
+    index: Number(btn.dataset.i),
+    bgOpacity: 0.95,
+    showHideAnimationType: "fade",
+    wheelToZoom: true,
+    closeTitle: "Cerrar",
+    zoomTitle: "Ampliar",
+    arrowPrevTitle: "Foto anterior",
+    arrowNextTitle: "Foto siguiente",
+    errorMsg: "No se pudo cargar la foto",
+  });
+  visor.on("destroy", () => { visor = null; });
+  visor.init();
+});
+
+cargarEnvios();
+
 // Esc o el botón "atrás" del celular cierran solo el visor, no el modal del producto
 modal.addEventListener("cancel", e => {
   if (!visor) return;
