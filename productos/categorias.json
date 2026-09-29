@@ -20,14 +20,14 @@
     "carpeta": "img/productos/topos"
   },
   {
-    "nombre": "Cadenas",
-    "archivo": "cadenas",
-    "carpeta": "img/productos/cadenas"
-  },
-  {
     "nombre": "Candongas",
     "archivo": "candongas",
     "carpeta": "img/productos/candongas"
+  },
+  {
+    "nombre": "Cadenas",
+    "archivo": "cadenas",
+    "carpeta": "img/productos/cadenas"
   },
   {
     "nombre": "Cadenas con dije",
