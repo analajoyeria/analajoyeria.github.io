@@ -71,6 +71,15 @@ if (CONFIG.facebook) {
 }
 document.getElementById("anio").textContent = new Date().getFullYear();
 
+// Datos de contacto debajo del logo
+document.getElementById("heroWa").href = waGeneral;
+document.getElementById("heroNumero").textContent = CONFIG.whatsapp.replace(/^57/, "").replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3");
+document.getElementById("heroIg").href = CONFIG.instagram;
+if (CONFIG.facebook) {
+  document.getElementById("heroFb").href = CONFIG.facebook;
+  document.getElementById("heroFbWrap").hidden = false;
+}
+
 // Filtros por categoría (se crean solos a partir de los productos)
 const categorias = ["Todas", ...new Set(PRODUCTOS.map(p => p.categoria))];
 filtrosEl.innerHTML = categorias
