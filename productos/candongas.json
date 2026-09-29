@@ -7,7 +7,7 @@
   {"id":195,"nombre":"CANDONGA LISA","precio":89000,"imagen":"img/productos/candongas/CANDONGALISA.webp","referencia":"274500005"},
   {"id":196,"nombre":"CANDONGA LISA MEDIANA","precio":89000,"imagen":"img/productos/candongas/CANDONGALISAMEDIANA.webp","referencia":"274500005"},
   {"id":193,"nombre":"CANDONGA ESPIRAL","precio":95000,"imagen":"img/productos/candongas/CANDONGAESPIRAL.webp","referencia":"275000005"},
-  {"id":191,"nombre":"CANDONGA DIAMANTADA","precio":105000,"imagen":"img/productos/candongas/CANDONGADIAMANTADA.webp"},
+  {"id":191,"nombre":"CANDONGA DIAMANTADA","referencia":"276000001","precio":105000,"imagen":"img/productos/candongas/CANDONGADIAMANTADA.webp"},
   {"id":192,"nombre":"CANDONGA DIAMANTADA","referencia":"276500001","precio":105000,"imagen":"img/productos/candongas/CANDONGADIAMANTADA2.webp"},
   {"id":190,"nombre":"CANDONGA CIRCON BLANCO","precio":108000,"imagen":"img/productos/candongas/CANDONGACIRCONBLANCO.webp","referencia":"276300005"},
   {"id":187,"nombre":"CANDONGA CIRCON VERDE","precio":110000,"imagen":"img/productos/candongas/CANDONGACIRCONVERDE.webp","referencia":"276500005"},
